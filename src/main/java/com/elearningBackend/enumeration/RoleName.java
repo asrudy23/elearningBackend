@@ -1,7 +1,8 @@
 package com.elearningBackend.enumeration;
 
-public enum Role {
+public enum RoleName {
     ADMIN,
+    USER,
     TEACHER,
     STUDENT
 }
