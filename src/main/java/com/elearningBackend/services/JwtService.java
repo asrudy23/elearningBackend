@@ -1,4 +1,4 @@
 package com.elearningBackend.services;
 
-public class AuthService {
+public class JwtService {
 }

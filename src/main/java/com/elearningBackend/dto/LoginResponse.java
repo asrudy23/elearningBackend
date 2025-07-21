@@ -1,4 +1,4 @@
 package com.elearningBackend.dto;
 
-public record LoginRequest() {
+public record LoginResponse() {
 }
