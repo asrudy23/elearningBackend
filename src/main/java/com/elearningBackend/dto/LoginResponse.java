@@ -1,4 +1,6 @@
 package com.elearningBackend.dto;
 
-public record LoginResponse() {
+public record LoginResponse(
+        String message,
+        UserResponse user) {
 }

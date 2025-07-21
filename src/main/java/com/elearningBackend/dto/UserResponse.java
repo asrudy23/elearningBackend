@@ -1,19 +1,16 @@
 package com.elearningBackend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.elearningBackend.enumeration.Hobby;
+import com.elearningBackend.enumeration.Role;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class UserResponse {
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private List<String> roles;
-}
+public record UserResponse(
+        Long id,
+        String firstName,
+        String lastName,
+        String email,
+        String phone,
+        Role role,
+        List<Hobby> hobbies,
+        boolean isActive) {}

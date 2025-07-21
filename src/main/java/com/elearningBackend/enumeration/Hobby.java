@@ -1,6 +1,6 @@
 package com.elearningBackend.enumeration;
 
-public enum Hobbies {
+public enum Hobby {
     READING,
     SOFTWARE,
     CLOUD,

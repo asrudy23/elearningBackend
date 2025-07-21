@@ -1,10 +1,10 @@
 package com.elearningBackend.models;
 
+import com.elearningBackend.enumeration.Hobby;
+import com.elearningBackend.enumeration.Role;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -12,10 +12,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(nullable = false)
@@ -33,18 +34,15 @@ public class User {
     @Column(nullable = false)
     private String phone;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_role",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")}
-    )
-    Set<Role> roles;
+    @Column(nullable = false)
+    private boolean isActive;
 
     @ElementCollection
-    private List<String> hobbies;
+    @Enumerated(EnumType.STRING)
+    private List<Hobby> hobbies;
 
     @ManyToMany
     @JoinTable(
@@ -54,7 +52,11 @@ public class User {
     )
     private List<Course> enrolledCourses;
 
-    // Relation One-to-Many:
-    @OneToMany(mappedBy = "teacher")
+    @ManyToMany
+    @JoinTable(
+            name = "teacher_courses",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
     private List<Course> coursesTaught;
 }
