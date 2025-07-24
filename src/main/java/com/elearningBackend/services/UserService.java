@@ -2,6 +2,7 @@ package com.elearningBackend.services;
 
 import com.elearningBackend.dto.UserRequest;
 import com.elearningBackend.dto.UserResponse;
+import com.elearningBackend.enumeration.Role;
 import com.elearningBackend.mapper.MapUser;
 import com.elearningBackend.models.User;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.elearningBackend.repositories.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +38,7 @@ public class UserService {
 
         if (userRepository.existsByEmail(userRequest.email())) {
             throw new RuntimeException("Email address already in use");
-        } else {
+        }
             User user = new User();
 
             user.setEmail(userRequest.email());
@@ -53,7 +56,7 @@ public class UserService {
             return mapUser.mapUserToResponse(userSaved);
 
 
-        }
+
     }
 
         public UserResponse getUserById (Long id){
@@ -65,5 +68,14 @@ public class UserService {
             List<User> users = userRepository.findAll();
             List<UserResponse> userResponses = users.stream().map(user -> mapUser.mapUserToResponse(user)).collect(Collectors.toList());
             return userResponses;
+        }
+
+        public List<UserResponse> getUsersByRole (Role role) {
+        List<User> users = userRepository.findByRole(role);
+        List<UserResponse> userResponses = users.stream().map(user -> mapUser.mapUserToResponse(user)).collect(Collectors.toList());
+        return userResponses;
+        }
+        public void deleteUserById(Long id){
+        userRepository.deleteById(id);
         }
     }

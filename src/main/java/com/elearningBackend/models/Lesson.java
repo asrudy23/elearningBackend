@@ -18,12 +18,12 @@ public class Lesson {
     @Column(nullable = false)
     private String title;
 
-    @Lob
     private String content;
 
-    private String videoUrl;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "file_id")
+    private File file;
 
-    private String imageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chapter_id", nullable = false)

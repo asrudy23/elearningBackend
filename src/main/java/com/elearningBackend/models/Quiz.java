@@ -1,5 +1,6 @@
 package com.elearningBackend.models;
 
+import com.elearningBackend.enumeration.QuizType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +17,16 @@ public class Quiz {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    private QuizType type;
+
     @Column(nullable = false)
     private String title;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chapter_id")
+    private Chapter chapter;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id", nullable = false)

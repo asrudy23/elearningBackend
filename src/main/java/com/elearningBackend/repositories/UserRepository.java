@@ -1,5 +1,6 @@
 package com.elearningBackend.repositories;
 
+import com.elearningBackend.enumeration.Role;
 import com.elearningBackend.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
     boolean existsByEmail(String email);
     Optional<User> findById(Long id);
+    List<User> findByRole(Role role);
 }

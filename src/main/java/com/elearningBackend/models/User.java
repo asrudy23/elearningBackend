@@ -4,6 +4,8 @@ import com.elearningBackend.enumeration.Hobby;
 import com.elearningBackend.enumeration.Role;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -50,7 +52,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    private List<Course> enrolledCourses;
+    private List<Course> enrolledCourses = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -58,5 +60,5 @@ public class User {
             joinColumns = @JoinColumn(name = "teacher_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    private List<Course> coursesTaught;
+    private List<Course> coursesTaught = new ArrayList<>();
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,11 +26,19 @@ public class Course {
 
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Chapter> chapters;
+    private List<Chapter> chapters = new ArrayList<>();
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Quiz> quizzes;
+    private List<Quiz> quizzes = new ArrayList<>();
 
     @ManyToMany(mappedBy = "enrolledCourses")
-    private List<User> students;
+    private List<User> students = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "coursesTaught")
+    private List<User> teachers = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="file_id",referencedColumnName = "id")
+    private File file;
+
 }
