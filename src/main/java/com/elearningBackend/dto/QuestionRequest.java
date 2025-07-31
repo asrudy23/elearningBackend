@@ -8,6 +8,4 @@ import java.util.List;
 public record QuestionRequest(
         String text,
         List<String> options,
-        String correctAnswer,
-        Long quizId) {
-}
+        String correctAnswer) { }
