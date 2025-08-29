@@ -46,7 +46,6 @@ public class UserService {
             user.setLastName(userRequest.lastName());
             user.setPassword(userRequest.password());
             user.setRole(userRequest.role());
-            user.setHobbies(userRequest.hobbies());
             user.setPhone(userRequest.phone());
             user.setActive(false);
             user.setPassword(passwordEncoder.encode(userRequest.password()));

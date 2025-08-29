@@ -1,5 +1,7 @@
 package com.elearningBackend.models;
 
+import com.elearningBackend.enumeration.Role;
+import com.elearningBackend.enumeration.StatusCourse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +25,9 @@ public class Course {
 
     @Lob
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    private StatusCourse statusCourse =StatusCourse.EN_ATTENTE;
 
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)

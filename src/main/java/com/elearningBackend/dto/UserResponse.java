@@ -12,5 +12,4 @@ public record UserResponse(
         String email,
         String phone,
         Role role,
-        List<Hobby> hobbies,
         boolean isActive) {}

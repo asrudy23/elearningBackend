@@ -7,8 +7,13 @@ import com.elearningBackend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.security.Principal;
 import java.util.List;
 
 
@@ -25,6 +30,7 @@ public class AuthService {
 
     public record LoginResult(String token, UserResponse userResponse) {}
 
+    @Transactional(readOnly = true)
     public LoginResult login(LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password())
@@ -41,7 +47,9 @@ public class AuthService {
 
         return new LoginResult(jwtToken, mapUser.mapUserToResponse(user));
     }
-
-    // Mapper pour convertir l'entité User en DTO UserResponse
-
+    public UserResponse getCurrentUser(Principal principal) {
+       String email = principal.getName();
+       User user = userRepository.findByEmail(email).orElseThrow(()->new RuntimeException("User not found "));
+       return mapUser.mapUserToResponse(user);
     }
+}

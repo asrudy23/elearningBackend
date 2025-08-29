@@ -42,10 +42,6 @@ public class User {
     @Column(nullable = false)
     private boolean isActive;
 
-    @ElementCollection
-    @Enumerated(EnumType.STRING)
-    private List<Hobby> hobbies;
-
     @ManyToMany
     @JoinTable(
             name = "user_enrolled_courses",

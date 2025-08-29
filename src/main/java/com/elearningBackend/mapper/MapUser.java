@@ -17,7 +17,6 @@ public class MapUser {
                 user.getEmail(),
                 user.getPhone(),
                 user.getRole(),
-                user.getHobbies(),
                 user.isActive()
                 );
 
