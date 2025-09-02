@@ -23,6 +23,7 @@ public class MapCourse {
                 course.getId(),
                 course.getTitle(),
                 course.getDescription(),
+                course.getCategory(),
                 mapFile.mapFileToResponse(course.getFile()),
                 course.getChapters().stream().map(chapter->mapChapter.mapChapterToResponse(chapter)).collect(Collectors.toList()),
                 course.getQuizzes().stream().map(quiz -> mapQuiz.mapQuizToResponse(quiz)).collect(Collectors.toList()),

@@ -47,8 +47,8 @@ public class AuthService {
 
         return new LoginResult(jwtToken, mapUser.mapUserToResponse(user));
     }
-    public UserResponse getCurrentUser(Principal principal) {
-       String email = principal.getName();
+    public UserResponse getCurrentUser(Authentication authentication) {
+       String email = authentication.getName();
        User user = userRepository.findByEmail(email).orElseThrow(()->new RuntimeException("User not found "));
        return mapUser.mapUserToResponse(user);
     }

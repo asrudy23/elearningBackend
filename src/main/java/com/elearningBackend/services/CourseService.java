@@ -41,6 +41,7 @@ public class CourseService {
             Course course = new Course();
             course.setTitle(courseRequest.title());
             course.setDescription(courseRequest.description());
+            course.setCategory(courseRequest.category());
             course.setFile(fileEntity);
             fileEntity.setCourse(course);
 
